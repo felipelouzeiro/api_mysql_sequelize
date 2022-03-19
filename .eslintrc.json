@@ -1,27 +1,19 @@
 {
     "env": {
         "browser": true,
-        "commonjs": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "no-console":"off",
-        "no-unused-vars":["error", { "argsIgnorePattern":"^_", "ignoreRestSiblings": true }],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
         "no-throw-literal":"off",
         "prefer-default-export": "off",
-        "consistent-return":"off"
+        "consistent-return":"off",
+        "no-undef":"off"
     }
 }
