@@ -1,0 +1,27 @@
+{
+  "name": "api_crud",
+  "version": "1.0.0",
+  "description": "API desenvolvida em Node e Express, revisando conceitos de MSC e ORM Sequelize.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "sequelize",
+    "express",
+    "jwt"
+  ],
+  "author": "Felipe Alves Louzeiro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-plugin-react": "^7.29.4",
+    "nodemon": "^2.0.15"
+  }
+}
