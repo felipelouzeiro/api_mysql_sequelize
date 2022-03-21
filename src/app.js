@@ -3,7 +3,9 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const db = require("./database/models");
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 app.get('/', (_req, res) => {
   res.send("Funcionando")
