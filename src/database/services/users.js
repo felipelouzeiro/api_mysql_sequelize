@@ -1,5 +1,5 @@
 const handlingError = require('../../utils/Helpers/handlingError');
-const { BadRequest, Conflit } = require('../../utils/Helpers/status-http-library');
+const { BadRequest, Conflit, NotFound } = require('../../utils/Helpers/status-http-library');
 const { User } = require('../models');
 const { userSchema, loginSchema } = require("../../utils/Schemas/schemas");
 const { genToken } = require('../../utils/Helpers/JWT');
@@ -49,9 +49,18 @@ const getUsers = async () => {
   return users;
 };
 
+const findById = async (id) => {
+  const user = await User.findOne({ where: { id } });
+
+  if (!user) { throw handlingError(NotFound, 'User does not exist'); }
+
+  console.log('User: ', user);  
+  return user;
+};
 
 module.exports = {
   create,
   login,
   getUsers,
+  findById,
 }
