@@ -8,7 +8,7 @@ app.use(express.json());
 const db = require("./database/models");
 db.sequelize.sync();
 
-app.use('/user', router);
+app.use(router);
 
 app.get('/', (_req, res) => {
   res.send("Funcionando")
