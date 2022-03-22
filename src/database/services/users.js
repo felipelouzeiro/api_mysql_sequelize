@@ -41,9 +41,17 @@ const login = async (email, password) => {
   return { token };
 };
 
+const getUsers = async () => {
+  const users = await User.findAll({
+    attributes: { exclude: 'password' }, // traz as informaçoes dos usuarios sem o password;
+  });
+  
+  return users;
+};
 
 
 module.exports = {
   create,
   login,
+  getUsers,
 }

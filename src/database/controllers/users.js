@@ -19,18 +19,29 @@ const createUser = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
- try {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const token = await userService.login(email, password);
+    const token = await userService.login(email, password);
 
-  return res.status(OK).json(token);
-} catch (err) {
-  next(err);
-}
+    return res.status(OK).json(token);
+  } catch (err) {
+    next(err);
+  }
+};
+
+getUsers = async (_req, res, next) => {
+  try {
+    const token = await userService.getUsers();
+
+    return res.status(OK).json(token);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {
   createUser,
   login,
+  getUsers,
 }
