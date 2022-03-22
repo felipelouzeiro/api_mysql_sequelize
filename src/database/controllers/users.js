@@ -1,6 +1,6 @@
-const { genToken } = require('../../utils/JWT');
-const createUser = require('../../service/Users/createUser');
-const { Created } = require('../../utils/status-http-library');
+const { genToken } = require('../../utils/Helpers/JWT');
+const createUser = require('../services/users');
+const { Created } = require('../../utils/Helpers/status-http-library');
 
 module.exports = async (req, res, next) => {
   try {
