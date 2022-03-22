@@ -22,7 +22,13 @@ const loginSchema = yup.object({
   .required('Password is required.'),
 });
 
+const categorySchema = yup.object({
+  name: yup.string()
+  .required('name is required.'),
+});
+
 module.exports = {
   userSchema,
   loginSchema,
+  categorySchema,
 }
