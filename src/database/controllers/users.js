@@ -1,6 +1,6 @@
 const { genToken } = require('../../utils/Helpers/JWT');
 const userService = require('../services/users');
-const { Created, OK } = require('../../utils/Helpers/status-http-library');
+const { Created, OK, NoContent } = require('../../utils/Helpers/status-http-library');
 
 const createUser = async (req, res, next) => {
   try {
@@ -52,9 +52,23 @@ const findById = async (req, res, next) => {
   }
 };
 
+deleleMyUser = async (req, res, next) => {
+  try {
+    const { id: userId } = req.user;
+    console.log(userId);
+
+    await userService.deleteMyUser(userId);
+
+    res.status(NoContent).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createUser,
   login,
   getUsers,
   findById,
+  deleleMyUser,
 }
