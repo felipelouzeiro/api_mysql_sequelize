@@ -2,7 +2,7 @@ const handlingError = require('../../utils/Helpers/handlingError');
 const { BadRequest, Conflit } = require('../../utils/Helpers/status-http-library');
 const { User } = require('../models');
 
-module.exports = async ({ displayName, email, password }) => {
+const create = async ({ displayName, email, password }) => {
   const { error } = userSchema.validate({ displayName, email, password });
   if (error) { throw handlingError(BadRequest, error.details[0].message); }
 
@@ -14,3 +14,7 @@ module.exports = async ({ displayName, email, password }) => {
   const response = await User.create({ displayName, email, password });
   return response.dataValues;
 };
+
+module.exports = {
+  create,
+}
