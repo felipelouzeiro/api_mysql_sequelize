@@ -1,12 +1,12 @@
 const { genToken } = require('../../utils/Helpers/JWT');
-const { create } = require('../services/users');
-const { Created } = require('../../utils/Helpers/status-http-library');
+const userService = require('../services/users');
+const { Created, OK } = require('../../utils/Helpers/status-http-library');
 
 const createUser = async (req, res, next) => {
   try {
     const { displayName, email, password } = req.body;
 
-    const response = await create({ displayName, email, password });
+    const response = await userService.create({ displayName, email, password });
 
     const { password: pass, ...withoutPassword } = response; // removo o password antes de retornar as infomações;
 
@@ -18,6 +18,19 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+ try {
+  const { email, password } = req.body;
+
+  const token = await userService.login(email, password);
+
+  return res.status(OK).json(token);
+} catch (err) {
+  next(err);
+}
+};
+
 module.exports = {
   createUser,
+  login,
 }

@@ -1,7 +1,8 @@
 const handlingError = require('../../utils/Helpers/handlingError');
 const { BadRequest, Conflit } = require('../../utils/Helpers/status-http-library');
 const { User } = require('../models');
-const { userSchema } = require("../../utils/Schemas/schemas")
+const { userSchema, loginSchema } = require("../../utils/Schemas/schemas");
+const { genToken } = require('../../utils/Helpers/JWT');
 
 const create = async ({ displayName, email, password }) => {
   try {
@@ -19,6 +20,30 @@ const create = async ({ displayName, email, password }) => {
   return response.dataValues;
 };
 
+const login = async (email, password) => {
+  try {
+    await loginSchema.validate({ email, password })
+  } catch (error) {
+    if (error) { throw handlingError(BadRequest, error.errors[0]); }
+  }
+  
+  const userFound = await User.findOne({ where: { email } });
+  
+  if (!userFound || userFound.password !== password) {
+    throw handlingError(BadRequest, 'Invalid fields');
+  } 
+  
+  const { password: pass, ...userWithoutPassword } = userFound.dataValues;
+  
+  const token = genToken(userWithoutPassword);
+  console.log('token: ', token);
+
+  return { token };
+};
+
+
+
 module.exports = {
   create,
+  login,
 }
