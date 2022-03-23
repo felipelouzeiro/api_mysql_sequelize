@@ -51,9 +51,24 @@ const deleteBlogPost = async (id, userId) => {
     where: { id } });
 };
 
+const getBlogPostById = async (id) => {
+  const post = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  if (!post) { throw handlingError(NotFound, 'Post does not exist'); }
+
+    console.log('post: ', post);
+  return post;
+};
+
 
 module.exports = {
   createBlogPost,
   getBlogPosts,
   deleteBlogPost,
+  getBlogPostById,
 }

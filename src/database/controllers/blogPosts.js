@@ -1,4 +1,4 @@
-const { Created, NoContent } = require("../../utils/Helpers/status-http-library");
+const { Created, NoContent, OK } = require("../../utils/Helpers/status-http-library");
 const blogPostService = require("../services/blogPost");
 
 const createBlogPost = async (req, res, next) => {
@@ -37,8 +37,22 @@ const deleteBlogPost = async (req, res, next) => {
     next(error);
   }
 };
+
+const getBlogPostById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const response = await blogPostService.getBlogPostById(id);
+
+    res.status(OK).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createBlogPost,
   getBlogPosts,
   deleteBlogPost,
+  getBlogPostById,
 }
