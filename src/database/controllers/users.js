@@ -30,7 +30,7 @@ const login = async (req, res, next) => {
   }
 };
 
-getUsers = async (_req, res, next) => {
+const getUsers = async (_req, res, next) => {
   try {
     const token = await userService.getUsers();
 
@@ -52,7 +52,7 @@ const findById = async (req, res, next) => {
   }
 };
 
-deleleMyUser = async (req, res, next) => {
+const deleleMyUser = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
     console.log(userId);
