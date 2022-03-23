@@ -4,7 +4,7 @@ const { postSchema } = require('../../utils/Schemas/schemas');
 const handlingError = require("../../utils/Helpers/handlingError");
 const { BadRequest, Unauthorized, NotFound } = require('../../utils/Helpers/status-http-library');
 
-const create = async ({ title, content, categoryIds, userId }) => {
+const createBlogPost = async ({ title, content, categoryIds, userId }) => {
   try {
     await postSchema.validate({ title, content, categoryIds })
   } catch (error) {
@@ -38,7 +38,7 @@ const getBlogPosts = async () => {
   return posts;
 };
 
-const deletePost = async (id, userId) => {
+const deleteBlogPost = async (id, userId) => {
   const existingPost = await BlogPost.findByPk(id);
   
   if (!existingPost) { throw handlingError(NotFound, 'Post does not exist'); }
@@ -53,7 +53,7 @@ const deletePost = async (id, userId) => {
 
 
 module.exports = {
-  create,
+  createBlogPost,
   getBlogPosts,
-  deletePost,
+  deleteBlogPost,
 }
