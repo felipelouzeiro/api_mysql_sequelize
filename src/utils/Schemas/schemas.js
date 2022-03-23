@@ -27,8 +27,20 @@ const categorySchema = yup.object({
   .required('name is required.'),
 });
 
+const postSchema = yup.object({
+  title: yup.string()
+  .required('title is required.'),
+
+  content: yup.string()
+  .required('content is required.'),
+
+  categoryIds: yup.array()
+  .required('categoryIds is required.'),
+});
+
 module.exports = {
   userSchema,
   loginSchema,
   categorySchema,
+  postSchema,
 }
