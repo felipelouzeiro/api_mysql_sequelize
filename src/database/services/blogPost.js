@@ -12,11 +12,9 @@ const createBlogPost = async ({ title, content, categoryIds, userId }) => {
   }
 
   // verifica se as categorias informadas existem no db
-  console.log("🚀 ~ file: blogPost.js ~ line 17 ~ create ~ categoryIds", categoryIds)
   const existingCategories = await Category.findAll({
     where: { id: { [Op.in]: categoryIds } },
   });
-  console.log("🚀 ~ file: blogPost.js ~ line 18 ~ create ~ existingCategories", existingCategories)
 
   if (existingCategories.length !== categoryIds.length) {
     throw handlingError(BadRequest, '"categoryIds" not found');
@@ -34,7 +32,6 @@ const getBlogPosts = async () => {
     ],
   });
 
-    console.log('posts: ', posts);
   return posts;
 };
 
@@ -61,7 +58,6 @@ const getBlogPostById = async (id) => {
 
   if (!post) { throw handlingError(NotFound, 'Post does not exist'); }
 
-    console.log('post: ', post);
   return post;
 };
 

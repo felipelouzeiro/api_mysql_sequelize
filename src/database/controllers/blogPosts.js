@@ -16,7 +16,6 @@ const createBlogPost = async (req, res, next) => {
 const getBlogPosts = async (req, res, next) => {
   try {
     const posts = await blogPostService.getBlogPosts();
-    console.log("🚀 ~ file: blogPosts.js ~ line 19 ~ getPosts ~ posts", posts)
 
     return res.status(200).json(posts);
   } catch (err) {

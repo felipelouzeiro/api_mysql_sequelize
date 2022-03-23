@@ -55,7 +55,6 @@ const findById = async (req, res, next) => {
 const deleleMyUser = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
-    console.log(userId);
 
     await userService.deleteMyUser(userId);
 

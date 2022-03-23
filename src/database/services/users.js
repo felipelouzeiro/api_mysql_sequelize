@@ -12,7 +12,6 @@ const create = async ({ displayName, email, password }) => {
   }
 
   const alreadyUser = await User.findOne({ where: { email } });
-  console.log("🚀 ~ file: users.js ~ line 14 ~ create ~ alreadyUser", alreadyUser)
 
   if (alreadyUser) { throw handlingError(Conflit, 'User already registered'); }
 
@@ -36,7 +35,6 @@ const login = async (email, password) => {
   const { password: pass, ...userWithoutPassword } = userFound.dataValues;
   
   const token = genToken(userWithoutPassword);
-  console.log('token: ', token);
 
   return { token };
 };
@@ -54,7 +52,6 @@ const findById = async (id) => {
 
   if (!user) { throw handlingError(NotFound, 'User does not exist'); }
 
-  console.log('User: ', user);  
   return user;
 };
 
