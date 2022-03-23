@@ -14,13 +14,13 @@ const createCategory = async (req, res, next) => {
 };
 
 const getCategories = async (req, res, next) => {
-  try {
-   const categories = await categoryService.getCategories();
- 
-   return res.status(OK).json(categories);
- } catch (err) {
-   next(err);
- }
+    try {
+    const categories = await categoryService.getCategories();
+  
+    return res.status(OK).json(categories);
+  } catch (err) {
+    next(err);
+  }
  };
 
 module.exports = {
