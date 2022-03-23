@@ -2,7 +2,7 @@ const { Op } = require('sequelize'); // https://sequelize.org/v5/manual/querying
 const { BlogPost, Category, User } = require('../models');
 const { postSchema } = require('../../utils/Schemas/schemas');
 const handlingError = require("../../utils/Helpers/handlingError");
-const { BadRequest } = require('../../utils/Helpers/status-http-library');
+const { BadRequest, Unauthorized, NotFound } = require('../../utils/Helpers/status-http-library');
 
 const create = async ({ title, content, categoryIds, userId }) => {
   try {
@@ -38,7 +38,22 @@ const getBlogPosts = async () => {
   return posts;
 };
 
+const deletePost = async (id, userId) => {
+  const existingPost = await BlogPost.findByPk(id);
+  
+  if (!existingPost) { throw handlingError(NotFound, 'Post does not exist'); }
+
+  if (existingPost.dataValues.userId !== userId) { 
+    throw handlingError(Unauthorized, 'Unauthorized user'); 
+}
+
+  await BlogPost.destroy({
+    where: { id } });
+};
+
+
 module.exports = {
   create,
   getBlogPosts,
+  deletePost,
 }
