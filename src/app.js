@@ -1,11 +1,11 @@
 const express = require('express');
-const router = require('./database/routes');
-const catcherError = require('./database/middlewares/catcherError');
+const router = require('./api/routes');
+const catcherError = require('./api/middlewares/catcherError');
 
 const app = express();
 app.use(express.json());
 // inicializa sequelize
-const db = require("./database/models");
+const db = require("./api/models");
 db.sequelize.sync();
 
 app.use(router);
